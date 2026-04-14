@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Smoothies</title>
+  <link rel="stylesheet" href="CSS/styles_catalogo.css">
+</head>
+<body>
+  <header> 
+    <button class="back-button" onclick="window.location.href='menuSuperadmin.html'">←</button>
+    <h1 class="titulo">Catálogo de Smoothies</h1>
+    <button class="crud-button" onclick="window.location.href='/crudProductos.html'">    <!-- Nuevo botón: Administración del catálogo (CRUD) -->
+      🛠️ Administrar Catálogo
+    </button>
+    <!-- Opcional: Botones separados según acción CRUD -->
+    <button class="crud-small" onclick="window.location.href='/crearProducto.html'">  <!-- Crear producto nuevo -->
+      ➕ Nuevo
+    </button>
+    <button class="crud-small" onclick="window.location.href='/editarProductos.html'">  <!-- Editar catálogo completo -->
+      ✏️ Editar
+    </button>
+    <button class="crud-small" onclick="window.location.href='/eliminarProductos.html'">   <!-- Eliminar productos -->
+      🗑️ Eliminar
+    </button>
+      <a href="carrito.html"><button class="go-to-cart" onclick="goToCart()">🛒 Ir al carrito</button></a>
+  </header>
+  <div id="catalogo" class="grid-container"></div>
+
+  <script>
+    // Función para cargar los productos del JSON
+    fetch("./JSON/catálogoProductos.json")
+      .then(response => response.json())
+      .then(productos => {
+        const contenedor = document.getElementById("catalogo");
+        productos.forEach(prod => {
+          const card = document.createElement("div");
+          card.classList.add("product-card");
+          card.innerHTML = `
+            <img src="${prod.image}" alt="${prod.name}">
+            <div class="product-info">
+              <h3>${prod.name}</h3>
+              <p>${prod.description}</p>
+              <span class="price">$${prod.price} MXN</span>
+              <div class="quantity-controls">
+                <button onclick="changeQuantity(this, -1)">−</button>
+                <span>${prod.quantity}</span>
+                <button onclick="changeQuantity(this, 1)">+</button>
+              </div>
+            <a href="carrito.html">
+              <button class="add-to-cart" onclick="addToCart('${prod.name}', ${prod.price})">
+                Agregar a Pedidos del Día
+              </button>
+            </a>
+            </div>
+          `;
+          contenedor.appendChild(card);
+        });
+        window.productos = productos;
+      });
+
+
+
+
+
+      
+   // Redirigir al detalle con el índice del producto
+    function verDetalle(index) {
+      window.location.href = `detalleProducto.html?id=${index}`;
+    }
+
+    function changeQuantity(button, amount) {
+      const span = button.parentElement.querySelector("span");
+      let current = parseInt(span.textContent);
+      current = Math.max(1, current + amount);
+      span.textContent = current;
+    }
+
+    function addToCart(name, price) {
+      alert(`"${name}" agregado al carrito por $${price} MXN`);
+    }
+  </script>
+</body>
+</html>

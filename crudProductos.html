@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrar Catálogo - CRUD de Productos</title>  
+  <link rel="stylesheet" href="CSS/styles_crudProductos.css">
+</head>
+<body>
+  <header>
+    <button class="back-btn" onclick="window.location.href='catalogo.html'">← Regresar</button>
+    <h2>Administrador de Catálogo (CRUD)</h2>
+  </header>
+  <h1>Gestión de Productos</h1>
+  <!-- FORMULARIO CRUD -->
+  <div class="form-container">
+    <label>URL de la Imagen</label>
+    <input type="text" id="image">
+    <label>Nombre del producto</label>
+    <input type="text" id="name">
+    <label>Descripción</label>
+    <textarea id="description"></textarea>
+    <label>Precio (MXN)</label>
+    <input type="number" id="price" min="1">
+    <label>Cantidad inicial</label>
+    <input type="number" id="quantity" min="1" value="1">
+    <button onclick="crearProducto()">Guardar Producto</button>
+  </div>
+  <!-- TABLA DE PRODUCTOS -->
+  <table>
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaProductos"></tbody>
+  </table>
+  <script src="js/crudProductos.js"></script>
+</body>
+
+</html>
