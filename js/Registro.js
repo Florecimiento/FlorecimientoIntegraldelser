@@ -1,5 +1,5 @@
 ///////////////////////////////////////////
-// FRONT – Registro de Usuario
+// FRONT – Registro de Usuario   CON EL CAMBIO DE RUTA VERIFICA QUE SI LO TENGA
 ///////////////////////////////////////////
 
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
